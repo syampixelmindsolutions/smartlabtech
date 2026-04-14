@@ -530,31 +530,7 @@ const SLIDES = [
     year: '2009',
     label: 'ISO Certified',
     desc: 'Achieved ISO certification, marking our commitment to global quality standards.',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=800&q=80',
-    year: '2013',
-    label: 'Pharma Division',
-    desc: 'Launched a dedicated pharmaceutical division serving top-tier clients.',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&q=80',
-    year: '2016',
-    label: 'NABL Accredited',
-    desc: 'Our lab received NABL accreditation, the gold standard in testing.',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&q=80',
-    year: '2020',
-    label: 'Smart Products',
-    desc: 'Pioneered smart diagnostic products integrating AI and IoT.',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?w=800&q=80',
-    year: '2024',
-    label: '500+ Clients',
-    desc: 'Crossed the milestone of 500+ enterprise clients across 20 countries.',
-  },
+  }, 
 ];
 
 

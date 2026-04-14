@@ -709,29 +709,30 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X, ChevronRight, ArrowRight, Phone, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 /* ── PRODUCT DATA ── */
 export const CATEGORIES = {
   'Featured Products': [
-    { name: 'Analytical Balance Suppliers',     icon: '🔬', desc: 'Advanced optical & electron microscopes' },
-    { name: 'Spectrometers',   icon: '📡', desc: 'UV-Vis, IR & mass spectrometry systems' },
-    { name: 'Centrifuges',     icon: '⚗️', desc: 'Micro, refrigerated & ultracentrifuges' },
-    { name: 'Chromatography',  icon: '🧫', desc: 'HPLC, GC and TLC systems' },
-    { name: 'Electrophoresis', icon: '⚡', desc: 'Gel electrophoresis & blotting units' },
+    { name: 'Analytical Balance Suppliers', icon: '🔬', desc: 'Advanced optical & electron microscopes', link: '/analytics' },
+    { name: 'Spectrometers', icon: '📡', desc: 'UV-Vis, IR & mass spectrometry systems', link: '/spectrometers' },
+    { name: 'Centrifuges', icon: '⚗️', desc: 'Micro, refrigerated & ultracentrifuges', link: '/centrifuges' },
+    { name: 'Chromatography', icon: '🧫', desc: 'HPLC, GC and TLC systems', link: '/chromatography' },
+    { name: 'Electrophoresis', icon: '⚡', desc: 'Gel electrophoresis & blotting units', link: '/electrophoresis' },
   ],
   'Marketed Products': [
-    { name: 'Precision Balances', icon: '⚖️', desc: 'Analytical & top-loading balances' },
-    { name: 'Incubators',         icon: '🌡️', desc: 'CO₂, BOD & shaking incubators' },
-    { name: 'pH Meters',          icon: '🧪', desc: 'Benchtop & portable pH solutions' },
-    { name: 'Autoclaves',         icon: '🔒', desc: 'Steam sterilization systems' },
-    { name: 'Water Purification', icon: '💧', desc: 'Type I, II & III water systems' },
+    { name: 'Precision Balances', icon: '⚖️', desc: 'Analytical & top-loading balances', link: '/balances' },
+    { name: 'Incubators', icon: '🌡️', desc: 'CO₂, BOD & shaking incubators', link: '/incubators' },
+    { name: 'pH Meters', icon: '🧪', desc: 'Benchtop & portable pH solutions', link: '/ph-meters' },
+    { name: 'Autoclaves', icon: '🔒', desc: 'Steam sterilization systems', link: '/autoclaves' },
+    { name: 'Water Purification', icon: '💧', desc: 'Type I, II & III water systems', link: '/water-purification' },
   ],
   'Smart Products': [
-    { name: 'AI Lab Systems',    icon: '🤖', desc: 'AI-powered analytical platforms' },
-    { name: 'Smart Sensors',     icon: '📶', desc: 'IoT-enabled lab monitoring sensors' },
-    { name: 'Automation Tools',  icon: '🦾', desc: 'Liquid handling & robotic platforms' },
-    { name: 'Lab Management',    icon: '📊', desc: 'LIMS & digital workflow solutions' },
-    { name: 'Remote Monitoring', icon: '🖥️', desc: 'Cloud-connected lab dashboards' },
+    { name: 'AI Lab Systems', icon: '🤖', desc: 'AI-powered analytical platforms', link: '/ai-lab-systems' },
+    { name: 'Smart Sensors', icon: '📶', desc: 'IoT-enabled lab monitoring sensors', link: '/smart-sensors' },
+    { name: 'Automation Tools', icon: '🦾', desc: 'Liquid handling & robotic platforms', link: '/automation-tools' },
+    { name: 'Lab Management', icon: '📊', desc: 'LIMS & digital workflow solutions', link: '/lab-management' },
+    { name: 'Remote Monitoring', icon: '🖥️', desc: 'Cloud-connected lab dashboards', link: '/remote-monitoring' },
   ],
 };
 
@@ -743,23 +744,25 @@ function smoothScrollTo(id) {
 }
 
 export default function Navbar() {
-  const [scrolled,        setScrolled]        = useState(false);
-  const [mobileOpen,      setMobileOpen]      = useState(false);
-  const [dropOpen,        setDropOpen]        = useState(false);
-  const [activeCategory,  setActiveCategory]  = useState('Featured Products');
-  const [mobileExpanded,  setMobileExpanded]  = useState({});
-  const dropRef  = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropOpen, setDropOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState('Featured Products');
+  const [mobileExpanded, setMobileExpanded] = useState({});
+  const dropRef = useRef(null);
   const timerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
-    useEffect(() => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
     const handleResize = () => {
-        setIsMobile(window.innerWidth < 1024);
+      setIsMobile(window.innerWidth < 1024);
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -776,7 +779,7 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const openDrop  = () => { clearTimeout(timerRef.current); setDropOpen(true); };
+  const openDrop = () => { clearTimeout(timerRef.current); setDropOpen(true); };
   const closeDrop = () => { timerRef.current = setTimeout(() => setDropOpen(false), 120); };
 
   const handleNavClick = (link) => {
@@ -794,22 +797,32 @@ export default function Navbar() {
   /* ── SHARED STYLES ── */
   const fontSans = "'DM Sans','Inter',system-ui,sans-serif";
   const fontSerif = "'Playfair Display',Georgia,serif";
-  const blue900  = '#0f2356';
-  const blue700  = '#1e3a8a';
-  const blue500  = '#2563eb';
-  const sky500   = '#0ea5e9';
+  const blue900 = '#0f2356';
+  const blue700 = '#1e3a8a';
+  const blue500 = '#2563eb';
+  const sky500 = '#0ea5e9';
   const slate600 = '#475569';
   const slate400 = '#94a3b8';
   const slate100 = '#f1f5f9';
-  const white    = '#ffffff';
+  const white = '#ffffff';
+
+  const handleClick = (link) => {
+    if (link === 'Home') {
+      navigate('/');
+    } else {
+      navigate(`/${link.toLowerCase()}`);
+    }
+  };
 
   /* ── LOGO (INCREASED SIZE) ── */
   const Logo = () => (
     <button
       onClick={() => smoothScrollTo('home')}
-      style={{ background: 'none', border: 'none', cursor: 'pointer',
+      style={{
+        background: 'none', border: 'none', cursor: 'pointer',
         display: 'flex', alignItems: 'center', gap: 14, padding: 0,
-        flexShrink: 0, textDecoration: 'none' }}
+        flexShrink: 0, textDecoration: 'none'
+      }}
     >
       {/* Real logo image */}
       <img
@@ -828,17 +841,21 @@ export default function Navbar() {
         borderRadius: 12, alignItems: 'center', justifyContent: 'center',
       }}>
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+          <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18" />
         </svg>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
-        <span style={{ fontFamily: fontSerif, fontSize: 22, fontWeight: 700, // Increased from 19
-          color: blue700, letterSpacing: '-0.02em' }}>
+        <span style={{
+          fontFamily: fontSerif, fontSize: 22, fontWeight: 700, // Increased from 19
+          color: blue700, letterSpacing: '-0.02em'
+        }}>
           SmartLab<span style={{ color: sky500 }}>Tech</span>
         </span>
-        <span style={{ fontFamily: fontSans, fontSize: 11, fontWeight: 500, // Increased from 10
+        <span style={{
+          fontFamily: fontSans, fontSize: 11, fontWeight: 500, // Increased from 10
           color: slate400, letterSpacing: '0.12em', textTransform: 'uppercase',
-          marginTop: 2 }}>
+          marginTop: 2
+        }}>
           Scientifically Yours
         </span>
       </div>
@@ -882,17 +899,21 @@ export default function Navbar() {
       }}>
         {[
           { Icon: Phone, text: '+91 98765 43210' },
-          { Icon: Mail,  text: 'info@smartlabtech.in' },
+          { Icon: Mail, text: 'info@smartlabtech.in' },
         ].map(({ Icon, text }) => (
           <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <Icon size={14} color="rgba(255,255,255,0.55)" /> {/* Increased icon size */}
-            <span style={{ fontFamily: fontSans, fontSize: 13, // Increased from 12
-              color: 'rgba(255,255,255,0.7)', fontWeight: 500 }}>{text}</span>
+            <span style={{
+              fontFamily: fontSans, fontSize: 13, // Increased from 12
+              color: 'rgba(255,255,255,0.7)', fontWeight: 500
+            }}>{text}</span>
           </div>
         ))}
         <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.15)' }} /> {/* Increased height */}
-        <span style={{ fontFamily: fontSans, fontSize: 13, // Increased from 12
-          color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
+        <span style={{
+          fontFamily: fontSans, fontSize: 13, // Increased from 12
+          color: 'rgba(255,255,255,0.6)', fontWeight: 500
+        }}>
           Est. 2001 · ISO 9001:2015 Certified
         </span>
       </div>
@@ -932,7 +953,6 @@ export default function Navbar() {
                 onMouseLeave={closeDrop}
               >
                 <button
-                  onClick={() => setDropOpen(o => !o)}
                   style={{
                     background: dropOpen ? '#eef2ff' : 'none',
                     border: 'none', cursor: 'pointer',
@@ -992,12 +1012,16 @@ export default function Navbar() {
                         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                       }}>
                         <div>
-                          <div style={{ fontSize: 15, fontWeight: 700, color: white, // Increased
-                            fontFamily: fontSans, letterSpacing: '0.02em' }}>
+                          <div style={{
+                            fontSize: 15, fontWeight: 700, color: white, // Increased
+                            fontFamily: fontSans, letterSpacing: '0.02em'
+                          }}>
                             Product Catalogue
                           </div>
-                          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', // Increased
-                            marginTop: 3, fontFamily: fontSans }}>
+                          <div style={{
+                            fontSize: 12, color: 'rgba(255,255,255,0.65)', // Increased
+                            marginTop: 3, fontFamily: fontSans
+                          }}>
                             Scientific &amp; laboratory instruments
                           </div>
                         </div>
@@ -1069,13 +1093,17 @@ export default function Navbar() {
                             background: '#eef2ff', borderRadius: 10,
                             border: '1px solid #c7d2fe',
                           }}>
-                            <div style={{ fontSize: 11, fontWeight: 700, color: '#4338ca', // Increased
+                            <div style={{
+                              fontSize: 11, fontWeight: 700, color: '#4338ca', // Increased
                               fontFamily: fontSans, letterSpacing: '0.1em',
-                              textTransform: 'uppercase', marginBottom: 4 }}>
+                              textTransform: 'uppercase', marginBottom: 4
+                            }}>
                               Since 2001
                             </div>
-                            <div style={{ fontSize: 12, color: '#4f46e5', // Increased
-                              fontFamily: fontSans, lineHeight: 1.4 }}>
+                            <div style={{
+                              fontSize: 12, color: '#4f46e5', // Increased
+                              fontFamily: fontSans, lineHeight: 1.4
+                            }}>
                               ISO 9001 certified lab instruments
                             </div>
                           </div>
@@ -1113,7 +1141,7 @@ export default function Navbar() {
                                     {item.icon}
                                   </div>
                                   <div style={{ paddingTop: 3 }}>
-                                    <div style={{
+                                    <div onClick={()=>navigate(item.link)} style={{
                                       fontSize: 14, fontWeight: 600, color: blue700, // Increased
                                       fontFamily: fontSans, lineHeight: 1.3,
                                     }}>
@@ -1127,8 +1155,10 @@ export default function Navbar() {
                                     </div>
                                   </div>
                                   <ChevronRight size={15} // Increased
-                                    style={{ marginLeft: 'auto', marginTop: 6,
-                                      color: slate400, flexShrink: 0 }} />
+                                    style={{
+                                      marginLeft: 'auto', marginTop: 6,
+                                      color: slate400, flexShrink: 0
+                                    }} />
                                 </button>
                               ))}
                             </motion.div>
@@ -1170,7 +1200,7 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <NavBtn key={link} label={link} onClick={() => handleNavClick(link)} />
+              <NavBtn key={link} label={link} onClick={() => handleClick(link)} />
             )
           )}
         </div>
@@ -1223,7 +1253,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div 
+            <motion.div
               key="mob-overlay"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
@@ -1236,7 +1266,7 @@ export default function Navbar() {
             <motion.div
               key="mob-drawer"
               initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.28, ease: [0.25,0.46,0.45,0.94] }}
+              transition={{ type: 'tween', duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{
                 position: 'fixed', top: 42 + NAV_H, right: 0, bottom: 0, // Adjusted top
                 width: 340, background: white, zIndex: 950, // Increased width
@@ -1294,8 +1324,10 @@ export default function Navbar() {
                                 >
                                   {cat}
                                   <ChevronDown size={14} color={sky500} // Increased
-                                    style={{ transform: mobileExpanded[cat] ? 'rotate(180deg)' : 'none',
-                                      transition: 'transform 0.2s' }} />
+                                    style={{
+                                      transform: mobileExpanded[cat] ? 'rotate(180deg)' : 'none',
+                                      transition: 'transform 0.2s'
+                                    }} />
                                 </button>
                                 <AnimatePresence>
                                   {mobileExpanded[cat] && (
@@ -1320,10 +1352,14 @@ export default function Navbar() {
                                         >
                                           <span style={{ fontSize: 20 }}>{item.icon}</span> {/* Increased */}
                                           <div>
-                                            <div style={{ fontSize: 14, fontWeight: 600, // Increased
-                                              color: blue700, fontFamily: fontSans }}>{item.name}</div>
-                                            <div style={{ fontSize: 12, color: slate400, // Increased
-                                              fontFamily: fontSans, marginTop: 2 }}>{item.desc}</div>
+                                            <div style={{
+                                              fontSize: 14, fontWeight: 600, // Increased
+                                              color: blue700, fontFamily: fontSans
+                                            }}>{item.name}</div>
+                                            <div style={{
+                                              fontSize: 12, color: slate400, // Increased
+                                              fontFamily: fontSans, marginTop: 2
+                                            }}>{item.desc}</div>
                                           </div>
                                         </button>
                                       ))}
@@ -1382,10 +1418,12 @@ export default function Navbar() {
               }}>
                 {[
                   { Icon: Phone, text: '+91 98765 43210' },
-                  { Icon: Mail,  text: 'info@smartlabtech.in' },
+                  { Icon: Mail, text: 'info@smartlabtech.in' },
                 ].map(({ Icon, text }) => (
-                  <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 10,
-                    marginBottom: 10, lastChild: { marginBottom: 0 } }}>
+                  <div key={text} style={{
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    marginBottom: 10, lastChild: { marginBottom: 0 }
+                  }}>
                     <Icon size={16} color={sky500} /> {/* Increased */}
                     <span style={{ fontSize: 14, color: slate600, fontFamily: fontSans }}>{text}</span> {/* Increased */}
                   </div>

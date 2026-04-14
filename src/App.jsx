@@ -1,5 +1,16 @@
+import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home.jsx'
+import AnalyticalBalance from './pages/AnalyticalBalancer.jsx';
 
-export default function App() {
-  return <Home />
+const App = () => {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/analytics" element={<AnalyticalBalance/>} />
+      </Routes>
+    </>
+  )
 }
+
+export default App;

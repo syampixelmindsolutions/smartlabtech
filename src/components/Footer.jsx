@@ -57,9 +57,36 @@ export default function Footer() {
           {/* Brand */}
           <div style={{ gridColumn: 'span 1' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 36, height: 36,
-                background: 'linear-gradient(135deg,#1e3a8a,#0ea5e9)',
-                borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              {/* Logo Image */}
+              <img 
+                src="/Screenshot 2026-04-13 151403.png" 
+                alt="SmartLabTech Logo"
+                style={{ 
+                  width: 36, 
+                  height: 36, 
+                  objectFit: 'contain',
+                  borderRadius: 8,
+                }}
+                onError={(e) => {
+                  // Fallback to icon if image fails to load
+                  e.target.style.display = 'none';
+                  const fallbackIcon = e.target.parentElement.querySelector('.fallback-icon');
+                  if (fallbackIcon) fallbackIcon.style.display = 'flex';
+                }}
+              />
+              {/* Fallback icon */}
+              <div 
+                className="fallback-icon" 
+                style={{ 
+                  width: 36, 
+                  height: 36,
+                  background: 'linear-gradient(135deg,#1e3a8a,#0ea5e9)',
+                  borderRadius: 8, 
+                  display: 'none', 
+                  alignItems: 'center', 
+                  justifyContent: 'center' 
+                }}
+              >
                 <FlaskConical size={18} color="#fff" />
               </div>
               <span style={{ fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700,
@@ -67,6 +94,7 @@ export default function Footer() {
                 SmartLab<span style={{ color: '#38bdf8' }}>Tech</span>
               </span>
             </div>
+
             <p style={{ fontSize: 13, color: '#94a3b8', lineHeight: 1.75,
               fontFamily: "'DM Sans',sans-serif", marginBottom: 20 }}>
               Precision instruments and scientific solutions for research, pharma, and education since 2004.
