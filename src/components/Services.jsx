@@ -144,7 +144,7 @@ function Reveal({ children, delay = 0 }) {
 export default function Services() {
   return (
     <section id="services"
-      style={{ background: '#f8faff', padding: 'clamp(64px,8vw,120px) 0', position: 'relative', overflow: 'hidden' }}>
+      style={{ background: '#f8faff', padding: 'clamp(0px,8vw,0px) 0', position: 'relative', overflow: 'hidden' }}>
 
       {/* Decorative background blob */}
       <div style={{ position: 'absolute', top: -200, right: -200, width: 600, height: 600,

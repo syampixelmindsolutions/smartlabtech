@@ -713,7 +713,7 @@ import { ChevronDown, Menu, X, ChevronRight, ArrowRight, Phone, Mail } from 'luc
 /* ── PRODUCT DATA ── */
 export const CATEGORIES = {
   'Featured Products': [
-    { name: 'Microscopes',     icon: '🔬', desc: 'Advanced optical & electron microscopes' },
+    { name: 'Analytical Balance Suppliers',     icon: '🔬', desc: 'Advanced optical & electron microscopes' },
     { name: 'Spectrometers',   icon: '📡', desc: 'UV-Vis, IR & mass spectrometry systems' },
     { name: 'Centrifuges',     icon: '⚗️', desc: 'Micro, refrigerated & ultracentrifuges' },
     { name: 'Chromatography',  icon: '🧫', desc: 'HPLC, GC and TLC systems' },

@@ -36,7 +36,7 @@ export default function About() {
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(16px,5vw,80px)' }}>
 
         {/* Pillars */}
-        <Reveal>
+        {/* <Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))',
             gap: 20, marginBottom: 80 }}>
             {PILLARS.map(({ icon: Icon, title, desc }) => (
@@ -56,7 +56,7 @@ export default function About() {
               </div>
             ))}
           </div>
-        </Reveal>
+        </Reveal> */}
 
         {/* Main layout */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
@@ -69,7 +69,7 @@ export default function About() {
                 background: 'linear-gradient(135deg,rgba(30,58,138,0.08),rgba(14,165,233,0.06))',
                 borderRadius: 20 }} />
               <img
-                src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=700&q=80"
+                src="/Screenshot 2026-04-13 150742.png"
                 alt="SmartLabTech Laboratory"
                 style={{ width: '100%', borderRadius: 16,
                   boxShadow: '0 20px 60px rgba(30,58,138,0.18)',

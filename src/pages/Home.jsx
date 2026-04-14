@@ -5,6 +5,7 @@ import Services from '../components/Services.jsx';
 import Journey  from '../components/Journey.jsx';
 import Contact  from '../components/Contact.jsx';
 import Footer   from '../components/Footer.jsx';
+import Testimonials from '../components/Testinomials.jsx';
 
 export default function Home() {
   return (
@@ -12,8 +13,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <About />
-      <Services />
       <Journey />
+      <Testimonials />
+      {/* <Services /> */}
       <Contact />
       <Footer />
     </div>

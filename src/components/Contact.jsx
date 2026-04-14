@@ -54,7 +54,7 @@ export default function Contact() {
 
   return (
     <section id="contact"
-      style={{ background: '#f8faff', padding: 'clamp(64px,8vw,120px) 0' }}>
+      style={{ background: '#f8faff', padding: 'clamp(20px,8vw,20px) 0' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 clamp(16px,5vw,80px)' }}>
 
         {/* Header */}
