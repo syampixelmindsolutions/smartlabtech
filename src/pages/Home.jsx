@@ -6,6 +6,7 @@ import Journey  from '../components/Journey.jsx';
 import Contact  from '../components/Contact.jsx';
 import Footer   from '../components/Footer.jsx';
 import Testimonials from '../components/Testinomials.jsx';
+import SideButtons from '../components/SideButton.jsx';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       {/* <Services /> */}
       <Contact />
       <Footer />
+      <SideButtons />
     </div>
   );
 }
